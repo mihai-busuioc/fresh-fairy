@@ -1,0 +1,38 @@
+html {
+    height: 100%;
+}
+
+body {
+    background: url('/media/home_background.jpg') no-repeat center fixed;
+    background-size: cover;
+    height: 80vh;
+    color: #00b7ff;
+
+    font-family: 'Merriweather',
+        serif;
+    font-weight: 500;
+}
+
+.logo-font {
+    text-transform: uppercase;
+}
+
+/* ---- Media Q ----*/
+
+/* Slightly larger container on xl screens */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 80%;
+    }
+}
+
+/* Fixed top navbar on med and up */
+@media (min-width: 992px) {
+    .fixed-top-desktop-only {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+}
