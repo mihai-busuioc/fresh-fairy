@@ -12,4 +12,4 @@ def all_services(request):
         'services': services,
     }
 
-    return render(request, 'services/services.html')
+    return render(request, 'services/services.html', context)
