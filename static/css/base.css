@@ -13,9 +13,18 @@ body {
     font-weight: 500;
 }
 
+.bg-opaque {
+    background: rgba(0, 0, 0, .25);
+}
+
 .logo-font {
     text-transform: uppercase;
 }
+
+.dropdown-menu {
+    background: rgba(0, 0, 0, .5);
+}
+
 
 /* ---- Media Q ----*/
 
@@ -34,5 +43,11 @@ body {
         right: 0;
         left: 0;
         z-index: 1030;
+    }
+}
+
+@media (max-width: 774px) {
+    .bg-opaque {
+        background: rgba(0, 0, 0, .5);
     }
 }
