@@ -18,7 +18,7 @@ def all_services(request):
 def service_detail(request, services_id):
     """ A view to show the detailed product """
 
-    service = Services.objects.get(id=services_id)
+    service = get_object_or_404(Services, pk=services_id)
 
     context = {
         'service': service,
