@@ -26,14 +26,14 @@
             <div class="row ">
                 {% for services in services %}
                 <div class="col-sm-6 col-md-3 cpl-lg-3">
-                    <div class="card h-100 border-1">
+                    <div class="card h-100 border-0">
                         {% if services.image %}
-                        <a href="">
+                        <a href="{% url 'service_detail' services.id %}">
                             <img src="{{ services.image.url }}" alt="{{ services.name }}"
                                 class="card-img-top img-fluid">
                         </a>
                         {% else %}
-                        <a href="">
+                        <a href="{% url 'service_detail' services.id %}">
                             <img src="{{ MEDIA_URL }}default.jpg" alt="{{ services.name }}"
                                 class="card-img-top img-fluid">
                         </a>
