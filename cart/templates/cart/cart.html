@@ -24,10 +24,12 @@
     <div class="row">
         <div class="col">
             {% if cart_items %}
-            <div class="table-responsive rounded"></div>
+            <div class="table-responsive rounded">
+                {{ cart_items }}
+            </div>
             {% else %}
             <p class="lead mb-5">Nothing selected!</p>
-            <a href="{% url 'services' %}" class="btn btn-outline-black rounded-0 btn-lg">
+            <a href="{% url 'services' %}" class="btn btn-outline-black rounded-pill btn-lg">
                 <span class="icon">
                     <i class="fas fa-arrow-left"></i>
                 </span>

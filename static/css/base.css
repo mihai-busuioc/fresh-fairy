@@ -66,6 +66,15 @@ body {
     color: white;
 }
 
+.btn-black:hover,
+.btn-black:active,
+.btn-black:focus {
+    border: 1px solid black;
+    background: white;
+    color: black !important;
+    /* important to override link color */
+}
+
 .btn-outline-black {
     background: white;
     color: black !important;

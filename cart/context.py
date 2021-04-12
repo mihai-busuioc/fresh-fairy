@@ -1,5 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
+from django.shortcuts import get_object_or_404
+from services.models import Services
 
 
 def cart_contents(request):
@@ -7,6 +9,17 @@ def cart_contents(request):
     cart_items = []
     total = 0
     services_count = 0
+    cart = request.session.get('cart', {})
+
+    for services_id, item_data in cart.items():
+        service = get_object_or_404(Services, pk=services_id)
+        total += item_data * service.price
+        services_count += item_data
+        cart_items.append({
+            'services_id': services_id,
+            'quantity': item_data,
+            'service': service,
+        })
 
     if total < settings.DISCOUNT_THRESHOLD:
         discount = 0
@@ -16,7 +29,6 @@ def cart_contents(request):
         discount_delta = 0
 
     grand_total = total - discount
-    
 
     context = {
         'cart_items': cart_items,
