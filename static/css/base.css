@@ -15,6 +15,7 @@ body {
 
 .bg-opaque {
     background: rgba(0, 0, 0, .5);
+    margin-right: 0;
 }
 
 .logo-font {
@@ -23,6 +24,10 @@ body {
 
 .dropdown-menu {
     background: rgba(0, 0, 0, .75);
+}
+
+.bg-black {
+    background: #000 !important;
 }
 
 .overlay {
@@ -41,6 +46,12 @@ body {
     text-align: justify;
     margin: auto;
 }
+
+.discount-container {
+    position: relative;
+    margin-top: -10px;
+}
+
 
 .message-container {
     position: fixed;
@@ -88,8 +99,14 @@ body {
         z-index: 1030;
     }
 
+
+
     .header-container {
         padding-top: 100px;
+    }
+
+    .discount-container {
+        margin-top: 70px;
     }
 }
 }
