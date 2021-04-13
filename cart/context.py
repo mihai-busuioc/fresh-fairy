@@ -11,16 +11,27 @@ def cart_contents(request):
     services_count = 0
     cart = request.session.get('cart', {})
 
-    for services_id, item_data in cart.items():
-        service = get_object_or_404(Services, pk=services_id)
-        total += item_data * service.price
-        services_count += item_data
-        cart_items.append({
-            'services_id': services_id,
-            'quantity': item_data,
-            'service': service,
-        })
-
+    for item_id, item_data in cart.items():
+        if isinstance(item_data, int):
+            service = get_object_or_404(Services, pk=item_id)
+            total += item_data * service.price
+            services_count += item_data
+            cart_items.append({
+                'item_id': item_id,
+                'quantity': item_data,
+                'service': service,
+            })
+        else:
+            service = get_object_or_404(Services, pk=item_id)
+            for date, quantity in item_data['items_by_date'].items():
+                total += quantity * service.price
+                services_count += quantity
+                cart_items.append({
+                    'item_id': item_id,
+                    'quantity': quantity,
+                    'service': service,
+                    'date': date,
+                })
     if total < settings.DISCOUNT_THRESHOLD:
         discount = 0
         discount_delta = total - settings.DISCOUNT_THRESHOLD
