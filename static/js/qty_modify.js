@@ -39,3 +39,9 @@ $('.decrement-qty').click(function (e) {
     var itemId = $(this).data('item_id');
     handleEnableDisable(itemId);
 });
+
+// Update quantity on click
+$('.update-link').click(function (e) {
+    var form = $(this).prev('.update-form');
+    form.submit();
+})

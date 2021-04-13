@@ -57,7 +57,7 @@
                             <p class="my-0">£{{ item.service.price }}</p>
                         </td>
                         <td class="py-3 w-25">
-                            <form class="form update-form" method="POST" action="">
+                            <form class="form update-form" method="POST" action="{% url 'adjust_cart' item.item_id %}">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <div class="input-group">
@@ -86,6 +86,10 @@
                                     </div>
                                 </div>
                             </form>
+                            <a href="#" class="update-link text-info"><small>Update</small></a>
+                            <a href="#" class="remove-item text-danger " style="float: right"
+                                id="remove_{{ item.item_id }}"
+                                data-your_date="{{ item.date }}"><small>Remove</small></a>
 
                         </td>
                         <td class="p-3 w-25">
@@ -138,6 +142,23 @@
 
     {% block postloadjs %}
     {{ block.super }}
-    <script language="JavaScript" type="text/javascript" src="{% static '/js/qty_modify.js' %}"></script>
+    <script language="JavaScript" type="text/javascript" src="{% static 'js/qty_modify.js' %}"></script>
+    <script>
+        // Remove item and reload on click
+        $('.remove-item').click(function (e) {
+            var csrfToken = "{{ csrf_token }}";
+            var itemId = $(this).attr('id').split('remove_')[1];
+            var date = $(this).data('your_date');
+            var url = `/cart/remove/${itemId}/`;
+            var data = {
+                'csrfmiddlewaretoken': csrfToken,
+                'your_date': date
+            };
 
+            $.post(url, data)
+                .done(function () {
+                    location.reload();
+                });
+        })
+    </script>
     {% endblock %}

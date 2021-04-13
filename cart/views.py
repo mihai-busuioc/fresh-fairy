@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse, HttpResponse
 from services.models import Services
 
 # Create your views here.
@@ -20,7 +20,6 @@ def add_to_cart(request, item_id):
         date = request.POST['your_date']
     cart = request.session.get('cart', {})
 
-    """if date:"""
     if item_id in list(cart.keys()):
         if date in cart[item_id]['items_by_date'].keys():
             cart[item_id]['items_by_date'][date] += quantity
@@ -28,11 +27,45 @@ def add_to_cart(request, item_id):
             cart[item_id]['items_by_date'][date] = quantity
     else:
         cart[item_id] = {'items_by_date': {date: quantity}}
-    """else:
-        if item_id in list(cart.keys()):
-            cart[item_id] += quantity
-        else:
-            cart[item_id] = quantity"""
 
     request.session['cart'] = cart
     return redirect(redirect_url)
+
+
+def adjust_cart(request, item_id):
+    """ Adjust the service in cart """
+
+    quantity = int(request.POST.get('quantity'))
+    date = None
+    if 'your_date' in request.POST:
+        date = request.POST['your_date']
+    cart = request.session.get('cart', {})
+
+    if item_id in list(cart.keys()):
+        if quantity > 0:
+            cart[item_id]['items_by_date'][date] = quantity
+        else:
+            del cart[item_id]['items_by_date'][date]
+            if not cart[item_id]['items_by_date']:
+                cart.pop(item_id)
+
+    request.session['cart'] = cart
+    return redirect(reverse('view_cart'))
+
+
+def remove_from_cart(request, item_id):
+    """ Remove the service from cart """
+
+    date = None
+    if 'your_date' in request.POST:
+        date = request.POST['your_date']
+        cart = request.session.get('cart', {})
+
+    if item_id in list(cart.keys()):
+        del cart[item_id]['items_by_date'][date]
+
+        if not cart[item_id]['items_by_date']:
+            cart.pop(item_id)
+
+    request.session['cart'] = cart
+    return HttpResponse(status=200)
