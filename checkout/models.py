@@ -40,8 +40,7 @@ class Order(models.Model):
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))[
             'lineitem_total__sum']
         if self.order_total > settings.DISCOUNT_THRESHOLD:
-            self.discount = self.order_total * \
-                settings.DISCOUNT_PERCENTAGE / 100
+            self.discount = self.order_total * settings.DISCOUNT_PERCENTAGE / 100
         else:
             self.discount = 0
         self.grand_total = self.order_total - self.discount
@@ -61,8 +60,9 @@ class Order(models.Model):
 
 
 class OrderLineItem(models.Model):
-    order = models.ForeignKey(Order, null=False, blank=False,
-                              on_delete=models.CASCADE, related_name='lineitems')
+    order = models.ForeignKey(
+        Order, null=False, blank=False,
+        on_delete=models.CASCADE, related_name='lineitems')
     service = models.ForeignKey(
         Services, null=False, blank=False, on_delete=models.CASCADE)
     service_date = models.CharField(
