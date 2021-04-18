@@ -10,12 +10,10 @@ body {
 
     font-family: 'Merriweather',
         serif;
-    font-weight: 500;
 }
 
 .bg-opaque {
     background: rgba(0, 0, 0, .5);
-    margin-right: 0;
 }
 
 .logo-font {
@@ -49,9 +47,9 @@ body {
 
 .discount-container {
     position: relative;
+
     margin-top: -10px;
 }
-
 
 .message-container {
     position: fixed;
@@ -99,12 +97,12 @@ body {
 
 /* ---- Media Q ----*/
 
-/* Slightly larger container on xl screens */
+/* Slightly larger container on xl screens 
 @media (min-width: 1200px) {
     .container {
         max-width: 80%;
     }
-}
+}*/
 
 /* Fixed top navbar on med and up */
 @media (min-width: 992px) {
@@ -113,7 +111,7 @@ body {
         top: 0;
         right: 0;
         left: 0;
-        z-index: 1030;
+        z-index: 9999;
     }
 
 
@@ -126,10 +124,12 @@ body {
         margin-top: 70px;
     }
 }
-}
+
 
 @media (max-width: 774px) {
     .bg-opaque {
         background: rgba(0, 0, 0, .5);
+        position: relative;
+
     }
 }

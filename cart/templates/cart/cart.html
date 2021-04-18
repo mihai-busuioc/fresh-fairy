@@ -14,19 +14,18 @@
 
 {% block content %}
 <div class="overlay"></div>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col text-center mt-3">
             <h2 class="logo-font ">Cart</h2>
             <hr class="w-50 mx-auto mb-1">
         </div>
     </div>
-
     <div class="row">
         <div class="col">
             {% if cart_items %}
-            <div class="table-responsive rounded">
-                <table class="table table-sm ">
+            <div class="table-responsive">
+                <table class="table align-middle table-sm">
                     <thead class="text-black">
                         <tr>
                             <th scope="col">Service Info</th>
@@ -113,13 +112,13 @@
                     </tr>
                     <tr>
                         <td colspan="5" class="text-right">
-                            <a href="{% url 'services' %}" class="btn btn-outline-black rounded-pill btn-lg">
+                            <a href="{% url 'services' %}" class="btn btn-sm btn-outline-black rounded-pill">
                                 <span class="icon">
                                     <i class="fas fa-arrow-left"></i>
                                 </span>
                                 <span class="text-uppercase">Keep Shopping</span>
                             </a>
-                            <a href="" class="btn btn-black rounded-pill btn-lg" style="float: right">
+                            <a href="" class="btn btn-black rounded-pill btn-sm" style="float: right">
                                 <span class="text-uppercase">Secure Checkout</span>
                                 <span class="icon">
                                     <i class="fas fa-lock"></i>
@@ -129,7 +128,7 @@
                     </tr>
                     {% else %}
                     <p class="lead text-center mb-5">Nothing selected!</p>
-                    <a href="{% url 'services' %}" class="btn btn-outline-black rounded-pill btn-lg">
+                    <a href="{% url 'services' %}" class="btn btn-outline-black rounded-pill btn-sm">
                         <span class="icon">
                             <i class="fas fa-arrow-left"></i>
                         </span>
@@ -139,75 +138,28 @@
             </div>
         </div>
     </div>
+</div>
+{% endblock %}
 
-    {% endblock %}
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'js/qty_modify.js' %}"></script>
+<script>
+    // Remove item and reload on click
+    $('.remove-item').click(function (e) {
+        var csrfToken = "{{ csrf_token }}";
+        var itemId = $(this).attr('id').split('remove_')[1];
+        var date = $(this).data('your_date');
+        var url = `/cart/remove/${itemId}/`;
+        var data = {
+            'csrfmiddlewaretoken': csrfToken,
+            'your_date': date
+        };
 
-    {% block postloadjs %}
-    {{ block.super }}
-
-    <script>
-        // Disable +/- buttons outside 1-8 range
-        function handleEnableDisable(itemId) {
-            var currentValue = parseInt($(`#id_qty_${itemId}`).val());
-            var minusDisabled = currentValue < 2;
-            var plusDisabled = currentValue > 7;
-            $(`#decrement-qty_${itemId}`).prop('disabled', minusDisabled);
-            $(`#increment-qty_${itemId}`).prop('disabled', plusDisabled);
-        }
-
-        // Ensure proper enabling/disabling of all inputs on page load
-
-        var allQtyInputs = $('.qty_modify');
-        for (var i = 0; i < allQtyInputs.length; i++) {
-            var itemId = $(allQtyInputs[i]).data('item_id');
-            handleEnableDisable(itemId);
-        }
-
-        // Check enable/disable every time the input is changed
-        $('.qty_input').change(function () {
-            var itemId = $(this).data('item_id');
-            handleEnableDisable(itemId);
-        });
-        // Increment quantity
-        $('.increment-qty').click(function (e) {
-            e.preventDefault();
-            var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
-            var currentValue = parseInt($(closestInput).val());
-            $(closestInput).val(currentValue + 1);
-            var itemId = $(this).data('item_id');
-            handleEnableDisable(itemId);
-        });
-
-        // Decrement quantity
-        $('.decrement-qty').click(function (e) {
-            e.preventDefault();
-            var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
-            var currentValue = parseInt($(closestInput).val());
-            $(closestInput).val(currentValue - 1);
-            var itemId = $(this).data('item_id');
-            handleEnableDisable(itemId);
-        });
-
-        // Update quantity on click
-        $('.update-link').click(function (e) {
-            var form = $(this).prev('.update-form');
-            form.submit();
-        })
-        // Remove item and reload on click
-        $('.remove-item').click(function (e) {
-            var csrfToken = "{{ csrf_token }}";
-            var itemId = $(this).attr('id').split('remove_')[1];
-            var date = $(this).data('your_date');
-            var url = `/cart/remove/${itemId}/`;
-            var data = {
-                'csrfmiddlewaretoken': csrfToken,
-                'your_date': date
-            };
-
-            $.post(url, data)
-                .done(function () {
-                    location.reload();
-                });
-        })
-    </script>
-    {% endblock %}
+        $.post(url, data)
+            .done(function () {
+                location.reload();
+            });
+    })
+</script>
+{% endblock %}

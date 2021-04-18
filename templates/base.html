@@ -1,4 +1,5 @@
 {% load static %}
+{% load cart_tools %}
 
 <!doctype html>
 <html lang="en">
@@ -30,8 +31,9 @@
     {% endblock %}
 
     {% block corejs %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/5ce2aa27a8.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
         integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
@@ -111,7 +113,20 @@
         </nav>
         <div id="discount-banner" class="row  text-center">
             <div class="col discount-container bg-black text-white">
+
+                {% if cart_items and discount_delta > 0 %}
+                <h4 class="my-1 text-danger">
+                    You could get a 20% discount by spending just <strong>£{{ discount_delta }}</strong> more!
+                </h4>
+                {% elif discount == 0 %}
                 <h4 class="logo-font my-1">20% Discount on orders over £{{ discount_threshold }}!</h4>
+                {% else %}
+                {% if request.user.is_authenticated %}
+                <h4 class=" my-1">Congratulations, you have a 30% discount!</h4>
+                {% else %}
+                <h4 class=" my-1">Congratulations, you have a 20% discount, Register/Login to get 10% more!</h4>
+                {% endif %}
+                {% endif %}
             </div>
         </div>
     </header>
