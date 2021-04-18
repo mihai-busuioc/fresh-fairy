@@ -14,6 +14,7 @@ def view_cart(request):
 def add_to_cart(request, item_id):
     """ Add service to cart """
 
+    service = Services.objects.get(pk=item_id)
     quantity = 1
     redirect_url = request.POST.get('redirect_url')
     date = None
@@ -24,10 +25,13 @@ def add_to_cart(request, item_id):
     if item_id in list(cart.keys()):
         if date in cart[item_id]['items_by_date'].keys():
             cart[item_id]['items_by_date'][date] += quantity
+            messages.success(request, f'Added {service.name} to your cart')
         else:
             cart[item_id]['items_by_date'][date] = quantity
+            messages.success(request, f'Added {service.name} to your cart')
     else:
         cart[item_id] = {'items_by_date': {date: quantity}}
+        messages.success(request, f'Added {service.name} to your cart')
 
     request.session['cart'] = cart
     return redirect(redirect_url)
