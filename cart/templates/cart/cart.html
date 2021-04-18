@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <button class="decrement-qty btn btn-sm btn-black rounded-start"
+                                            <button class="decrement-qty qty_modify btn btn-sm btn-black rounded-start"
                                                 data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
                                                 <span>
                                                     <i class="fas fa-minus fa-sm"></i>
@@ -74,7 +74,7 @@
                                             name="quantity" value="{{ item.quantity }}" min="1" max="8"
                                             data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
                                         <div class="input-group-append">
-                                            <button class="increment-qty btn btn-sm btn-black rounded-end"
+                                            <button class="increment-qty qty_modify btn btn-sm btn-black rounded-end"
                                                 data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
                                                 <span>
                                                     <i class="fas fa-plus fa-sm"></i>
@@ -144,8 +144,55 @@
 
     {% block postloadjs %}
     {{ block.super }}
-    <script language="JavaScript" type="text/javascript" src="{% static 'js/qty_modify.js' %}"></script>
+
     <script>
+        // Disable +/- buttons outside 1-8 range
+        function handleEnableDisable(itemId) {
+            var currentValue = parseInt($(`#id_qty_${itemId}`).val());
+            var minusDisabled = currentValue < 2;
+            var plusDisabled = currentValue > 7;
+            $(`#decrement-qty_${itemId}`).prop('disabled', minusDisabled);
+            $(`#increment-qty_${itemId}`).prop('disabled', plusDisabled);
+        }
+
+        // Ensure proper enabling/disabling of all inputs on page load
+
+        var allQtyInputs = $('.qty_modify');
+        for (var i = 0; i < allQtyInputs.length; i++) {
+            var itemId = $(allQtyInputs[i]).data('item_id');
+            handleEnableDisable(itemId);
+        }
+
+        // Check enable/disable every time the input is changed
+        $('.qty_input').change(function () {
+            var itemId = $(this).data('item_id');
+            handleEnableDisable(itemId);
+        });
+        // Increment quantity
+        $('.increment-qty').click(function (e) {
+            e.preventDefault();
+            var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+            var currentValue = parseInt($(closestInput).val());
+            $(closestInput).val(currentValue + 1);
+            var itemId = $(this).data('item_id');
+            handleEnableDisable(itemId);
+        });
+
+        // Decrement quantity
+        $('.decrement-qty').click(function (e) {
+            e.preventDefault();
+            var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+            var currentValue = parseInt($(closestInput).val());
+            $(closestInput).val(currentValue - 1);
+            var itemId = $(this).data('item_id');
+            handleEnableDisable(itemId);
+        });
+
+        // Update quantity on click
+        $('.update-link').click(function (e) {
+            var form = $(this).prev('.update-form');
+            form.submit();
+        })
         // Remove item and reload on click
         $('.remove-item').click(function (e) {
             var csrfToken = "{{ csrf_token }}";

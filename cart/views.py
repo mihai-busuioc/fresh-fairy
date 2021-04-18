@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse
+from django.contrib import messages
 from services.models import Services
 
 # Create your views here.
@@ -56,16 +57,19 @@ def adjust_cart(request, item_id):
 def remove_from_cart(request, item_id):
     """ Remove the service from cart """
 
-    date = None
-    if 'your_date' in request.POST:
-        date = request.POST['your_date']
-        cart = request.session.get('cart', {})
+    try:
+        date = None
+        if 'your_date' in request.POST:
+            date = request.POST['your_date']
+            cart = request.session.get('cart', {})
 
-    if item_id in list(cart.keys()):
-        del cart[item_id]['items_by_date'][date]
+        if item_id in list(cart.keys()):
+            del cart[item_id]['items_by_date'][date]
 
-        if not cart[item_id]['items_by_date']:
-            cart.pop(item_id)
+            if not cart[item_id]['items_by_date']:
+                cart.pop(item_id)
 
-    request.session['cart'] = cart
-    return HttpResponse(status=200)
+        request.session['cart'] = cart
+        return HttpResponse(status=200)
+    except Exception as e:
+        return HttpResponse(status=500)
