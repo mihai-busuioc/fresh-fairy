@@ -77,8 +77,8 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-dark text-end border-0"
                                 aria-labelledby="user-options">
-                                {% if request.user.is.authenticated %}
-                                {% if request.user.is.superuser %}
+                                {% if request.user.is_authenticated %}
+                                {% if request.user.is_superuser %}
                                 <a href="" class="dropdown-item">Management</a>
                                 {% endif %}
                                 <a href="" class="dropdown-item">My Profile</a>
