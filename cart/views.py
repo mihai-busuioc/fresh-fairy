@@ -17,8 +17,6 @@ def add_to_cart(request, item_id):
     service = get_object_or_404(Services, pk=item_id)
     quantity = 1
     redirect_url = request.POST.get('redirect_url')
-    """date = None
-    if 'your_date' in request.POST:"""
     date = request.POST['your_date']
     cart = request.session.get('cart', {})
 
@@ -70,8 +68,6 @@ def remove_from_cart(request, item_id):
 
     try:
         service = get_object_or_404(Services, pk=item_id)
-        """date = None
-        if 'your_date' in request.POST:"""
         date = request.POST['your_date']
         cart = request.session.get('cart', {})
 
