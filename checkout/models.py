@@ -38,7 +38,7 @@ class Order(models.Model):
         accounting for delivery costs.
         """
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))[
-            'lineitem_total__sum']
+            'lineitem_total__sum'] or 0
         if self.order_total > settings.DISCOUNT_THRESHOLD:
             self.discount = self.order_total * settings.DISCOUNT_PERCENTAGE / 100
         else:
