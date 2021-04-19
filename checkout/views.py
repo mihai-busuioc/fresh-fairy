@@ -48,6 +48,7 @@ def checkout(request):
                             quantity=quantity,
                             service_date=date,
                         )
+                        order_line_item.save()
                 except Services.DoesNotExist:
                     messages.error(request, (
                         "One of the services in your cart wasn't found in our database."
