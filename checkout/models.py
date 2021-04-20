@@ -40,7 +40,8 @@ class Order(models.Model):
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))[
             'lineitem_total__sum'] or 0
         if self.order_total > settings.DISCOUNT_THRESHOLD:
-            self.discount = self.order_total * settings.DISCOUNT_PERCENTAGE / 100
+            self.discount = self.order_total * \
+                settings.DISCOUNT_PERCENTAGE / 100
         else:
             self.discount = 0
         self.grand_total = self.order_total - self.discount
@@ -69,7 +70,8 @@ class OrderLineItem(models.Model):
         max_length=99, null=True, blank=True)  # service date
     quantity = models.IntegerField(null=False, blank=False, default=0)
     lineitem_total = models.DecimalField(
-        max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+        max_digits=6, decimal_places=2,
+        null=False, blank=False, editable=False)
 
     def save(self, *args, **kwargs):
         """
