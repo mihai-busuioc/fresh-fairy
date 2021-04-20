@@ -246,7 +246,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="col-md-6 background-muted">
+                        <div class="col-md-6 bg-light">
                             <div class=" border-bottom">
 
                                 {% for item in order.lineitems.all %}
@@ -263,10 +263,10 @@
                                     </div>
                                     <div class="col-md-6">
                                         {% if item.service.image %}
-                                        <img class="img-fluid service-img " src="{{ item.service.image.url }}"
+                                        <img class="img-fluid service-img mt-3 mb-1" src="{{ item.service.image.url }}"
                                             alt="{{ item.service.name }}">
                                         {% else %}
-                                        <img class="img-fluid" src="{{ MEDIA_URL }}default.jpg"
+                                        <img class="img-fluid service-img mt-3 mb-1" src="{{ MEDIA_URL }}default.jpg"
                                             alt="{{ item.service.name }}">
                                         {% endif %}
                                     </div>
@@ -299,11 +299,11 @@
                             </div>
                             <div class="row g-0">
                                 <div class="col-md-6">
-                                    <div class="p-3 d-flex justify-content-center align-self-center"> <span
+                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span
                                             class="fw-bold">Total</span> </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="p-3 d-flex justify-content-center align-self-center"> <span
+                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span
                                             class="fw-bold">£{{ order.grand_total }}</span> </div>
                                 </div>
                             </div>
