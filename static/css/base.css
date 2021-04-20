@@ -6,8 +6,7 @@ body {
     background: url('/media/home_background.jpg') no-repeat center fixed;
     background-size: cover;
     height: 80vh;
-    color: #00b7ff;
-
+    color: #24ADE3;
     font-family: 'Merriweather',
         serif;
 }
@@ -71,6 +70,19 @@ body {
 .btn-black {
     background: black;
     color: white;
+}
+
+.btn-fresh {
+    background: #24ADE3;
+    color: black;
+}
+
+.btn-fresh:hover,
+.btn-fresh:active,
+.btn-fresh:focus {
+    border: 1px solid #24ADE3;
+    background: transparent;
+    color: black;
 }
 
 .btn-black:hover,
@@ -155,12 +167,12 @@ body {
 
 /* ---- Media Q ----*/
 
-/* Slightly larger container on xl screens 
+/* Slightly larger container on xl screens */
 @media (min-width: 1200px) {
     .container {
         max-width: 80%;
     }
-}*/
+}
 
 /* Fixed top navbar on med and up */
 @media (min-width: 992px) {
@@ -180,6 +192,16 @@ body {
 
     .discount-container {
         margin-top: 70px;
+    }
+}
+
+@media (min-width: 992px) {
+    .service-img {
+        padding-left: 30px;
+        border: 2px solid #24ADE3;
+        border-radius: 50%;
+        width: 66%;
+        align-items: center;
     }
 }
 
