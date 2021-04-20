@@ -173,6 +173,28 @@ body {
     display: block;
 }
 
+/* Allauth form formatting */
+
+.allauth-form-inner-content p {
+    margin-top: 1.5rem;
+    /* mt-4 */
+    color: #6c757d;
+    /* text-secondary */
+}
+
+.allauth-form-inner-content input {
+    border-color: #000;
+    border-radius: 5px;
+}
+
+.allauth-form-inner-content label:not([for='id_remember']) {
+    display: none;
+}
+
+.allauth-form-inner-content input::placeholder {
+    color: #aab7c4;
+}
+
 /* ---- Media Q ----*/
 
 /* Slightly larger container on xl screens */
@@ -192,8 +214,6 @@ body {
         z-index: 9999;
     }
 
-
-
     .header-container {
         padding-top: 100px;
     }
@@ -202,19 +222,6 @@ body {
         margin-top: 70px;
     }
 }
-
-/* service img centered on med and up 
-@media (min-width: 992px) {
-    .service-img {
-        margin-top: 30px;
-        margin-left: 30px;
-        border: 2px solid #24ADE3;
-        border-radius: 50%;
-        width: 66%;
-        align-items: center;
-    }
-}*/
-
 
 @media (max-width: 774px) {
     .bg-opaque {
