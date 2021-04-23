@@ -71,6 +71,15 @@
                                     </span>
                                     <span class="text-uppercase">Go to your Profile Page</span>
                                 </a>
+                                {% else %}
+
+                                <a href="{% url 'account_signup' %}" class="btn btn-sm btn-fresh mt-1 rounded-pill">
+                                    <span class="icon">
+                                        <i class="fas fa-chevron-up"></i>
+                                    </span>
+                                    <span class="text-uppercase">Register</span>
+                                </a>
+                                <p class=" small text-muted">For an extra 10% Discount on your next order!</p>
                                 {% endif %}
                             </div>
                         </div>

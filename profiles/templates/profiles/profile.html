@@ -34,7 +34,39 @@
         </div>
         <div class="col-12 col-lg-6">
             <p class="text-muted">Order History</p>
-            {{ orders }}
+            <!-- order history-->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Order No</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Services</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <th scope="row"><a href="{% url 'order_history' order.order_number %}"
+                                title="{{ order.order_number}}">
+                                {{ order.order_number|truncatechars:4 }}
+                            </a></th>
+                        <td>{{ order.date }}</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for item in order.lineitems.all %}
+                                <li class="small">
+                                    {{ item.service.name }} x {{ item.quantity }} for: {{ item.service.date }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>£{{ order.grand_total }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!--order end-->
         </div>
     </div>
     {% endblock %}
