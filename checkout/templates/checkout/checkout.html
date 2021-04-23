@@ -23,7 +23,7 @@
             <hr class="w-50 mx-auto mb-1">
         </div>
     </div>
-
+    <!-- order element-->
     <div class="row">
         <div class="col-12 col-lg-6 order-lg-last mb-5">
             <p class="text-muted">Order Summary ({{ services_count }})</p>
@@ -35,6 +35,7 @@
                     <p class="mb-1 mt-0 small text-muted">Subtotal</p>
                 </div>
             </div>
+            <!-- cart items-->
             {% for item in cart_items %}
             <div class="row">
                 <div class="col-2 mb-1">

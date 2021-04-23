@@ -15,7 +15,7 @@
 
 {% block content %}
 <div class="overlay"></div>
-<div class="container-fluid">
+<div class="container-fluid mb-4">
     <div class="row">
         <div class="col text-center mt-3">
             <h2 class="logo-font">Thank You</h2>
@@ -23,21 +23,18 @@
 
         </div>
     </div>
-
-    <div class="container mt-4 mb-4">
+    <!-- checkout success-->
+    <div class="container container-main mt-4 mb-4">
         <div class="row d-flex cart align-items-center justify-content-center">
             <div class="col-md-10">
                 <div class="card">
                     <div class="d-flex justify-content-center border-bottom">
                         <div class="p-3">
                             <div class="progresses">
-
-
                                 <p class="text-black my-auto">Your order information is below. A confirmation email will
                                     be
                                     sent to
                                     <strong>{{ order.email }}</strong></p>
-
                             </div>
                         </div>
                     </div>
@@ -79,9 +76,9 @@
                                 {% endif %}
                             </div>
                         </div>
+                        <!-- order items -->
                         <div class="col-md-6 bg-light">
                             <div class=" border-bottom">
-
                                 {% for item in order.lineitems.all %}
                                 <div class="row g-0 border-bottom">
                                     <div class="col-md-6 text-center align-middle ">
@@ -105,10 +102,8 @@
                                     </div>
                                 </div>
                                 {% endfor %}
-
-
                             </div>
-
+                            <!-- order financial info -->
                             <div class="row g-0 border-bottom">
                                 <div class="col-md-6">
                                     <div class="p-3 d-flex justify-content-center align-items-center">
@@ -142,9 +137,9 @@
                             </div>
                         </div>
                     </div>
-                    <div> </div>
                 </div>
             </div>
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}

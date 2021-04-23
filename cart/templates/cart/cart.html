@@ -13,39 +13,19 @@
 
 {% block content %}
 <div class="overlay"></div>
+<!--
 <div class="container-fluid">
-    <div class="row">
-        <div class="col text-center mt-3">
-            <h2 class="logo-font ">Cart</h2>
-            <hr class="w-50 mx-auto mb-1">
-        </div>
-    </div>
+   
     <div class="row">
         <div class="col">
             {% if cart_items %}
             <div class="table-responsive">
                 <table class="table align-middle table-sm">
-                    <thead class="text-black">
-                        <tr>
-                            <th scope="col">Service Info</th>
-                            <th scope="col"></th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Qty</th>
-                            <th scope="col">Subtotal</th>
-
-                        </tr>
-
-                    </thead>
+                   
                     {% for item in cart_items %}
                     <tr>
                         <td class="p-3 ">
-                            {% if item.service.image %}
-                            <img class="img-fluid rounded" src="{{ item.service.image.url }}"
-                                alt="{{ item.service.name }}">
-                            {% else %}
-                            <img class="img-fluid rounded" src="{{ MEDIA_URL }}default.jpg"
-                                alt="{{ item.service.name }}">
-                            {% endif %}
+                            
                         </td>
                         <td class="py-3">
                             <p class="my-0"><strong>{{ item.service.name }}</strong></p>
@@ -138,6 +118,174 @@
             </div>
         </div>
     </div>
+</div>
+-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-center mt-3">
+            <h2 class="logo-font">Cart</h2>
+            <hr class="w-50 mx-auto mb-1">
+
+        </div>
+    </div>
+    {% if cart_items %}
+    <div class="container mt-4 mb-4">
+        <div class="row d-flex cart align-items-center justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="d-flex justify-content-center border-bottom">
+                        <div class="p-3">
+                            <div class="progresses">
+
+
+                                <p class="text-black my-auto">Your cart information is below. </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-0">
+
+                        <div class="col bg-light">
+                            <div class=" border-bottom">
+                                <!--cart items-->
+                                {% for item in cart_items %}
+                                <div class="row g-0 border-bottom">
+                                    <div class="col text-center align-middle ">
+                                        <p class="mt-4 "><i class="fa fa-clock-o text-muted"></i> Service Date:
+                                            <p class="small  mb-0 text-black fst-italic">
+                                                {{ item.date }}</p>
+                                        </p>
+                                        <h6 class="mt-4 mb-0">{{ item.service.name }}</h6>
+                                        <p class="small mt-4 text-black mb-0">{{ item.quantity }} @
+                                            £{{ item.service.price }}
+                                            each = £{{ item.service.price | calc_subtotal:item.quantity }}</p>
+                                        <!-- inc/decrement quantity-->
+                                        <form class="form update-form" method="POST"
+                                            action="{% url 'adjust_cart' item.item_id %}">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <button
+                                                            class="decrement-qty qty_modify btn btn-sm btn-black rounded-start"
+                                                            data-item_id="{{ item.item_id }}"
+                                                            id="decrement-qty_{{ item.item_id }}">
+                                                            <span>
+                                                                <i class="fas fa-minus fa-sm"></i>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                    <input class="form-control form-control-sm qty_input" type="number"
+                                                        name="quantity" value="{{ item.quantity }}" min="1" max="8"
+                                                        data-item_id="{{ item.item_id }}"
+                                                        id="id_qty_{{ item.item_id }}">
+                                                    <div class="input-group-append">
+                                                        <button
+                                                            class="increment-qty qty_modify btn btn-sm btn-black rounded-end"
+                                                            data-item_id="{{ item.item_id }}"
+                                                            id="increment-qty_{{ item.item_id }}">
+                                                            <span>
+                                                                <i class="fas fa-plus fa-sm"></i>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+
+                                                    <input type="hidden" name="your_date" value="{{ item.date }}">
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!--update/remove links-->
+                                        <a href="#" class="update-link mt-3 text-success"
+                                            style="float: left"><small>Update</small></a>
+                                        <a href="#" class="remove-item mt-3 text-danger " style="float: right"
+                                            id="remove_{{ item.item_id }}"
+                                            data-your_date="{{ item.date }}"><small>Remove</small></a>
+                                    </div>
+                                    <!-- service image-->
+                                    <div class="col-md-6">
+                                        {% if item.service.image %}
+                                        <img class="img-fluid service-img mt-3 mb-1" src="{{ item.service.image.url }}"
+                                            alt="{{ item.service.name }}">
+                                        {% else %}
+                                        <img class="img-fluid service-img mt-3 mb-1" src="{{ MEDIA_URL }}default.jpg"
+                                            alt="{{ item.service.name }}">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+
+                            </div>
+                            <!--subtotal-->
+                            <div class="row g-0 border-bottom">
+                                <div class="col-md-6">
+                                    <div class="p-3 d-flex justify-content-center align-items-center">
+                                        <span>Subtotal</span> </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 d-flex justify-content-center align-items-center">
+                                        <span>£{{ total|floatformat:2 }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--discount-->
+                            <div class="row g-0 border-bottom">
+                                <div class="col-md-6">
+                                    <div class="p-3 d-flex justify-content-center align-items-center">
+                                        <span>Discount</span> </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 d-flex justify-content-center align-items-center">
+                                        <span>£{{ discount|floatformat:2 }}</span> </div>
+                                </div>
+                            </div>
+                            <!--Grand total-->
+                            <div class="row g-0">
+                                <div class="col-md-6">
+                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span
+                                            class="fw-bold">Total</span> </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span
+                                            class="fw-bold">£{{ grand_total|floatformat:2 }}</span> </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Back and checkout buttons-->
+    <div class="row d-flex align-items-center mt-4 mb-3 justify-content-center">
+        <div class="col-md-8">
+            <a href="{% url 'services' %}" class="btn btn-sm btn-outline-black rounded-pill">
+                <span class="icon">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text-uppercase">Keep Shopping</span>
+            </a>
+            <a href="{% url 'checkout' %}" class="btn btn-black rounded-pill btn-sm" style="float: right">
+                <span class="text-uppercase">Secure Checkout</span>
+                <span class="icon">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+    {% else %}
+    <p class="lead text-center mb-5">Nothing selected!</p>
+    <a href="{% url 'services' %}" class="btn btn-outline-black rounded-pill btn-sm">
+        <span class="icon">
+            <i class="fas fa-arrow-left"></i>
+        </span>
+        <span class="text-uppercase">Keep Shopping</span>
+    </a>
+    {% endif %}
+
 </div>
 {% endblock %}
 
