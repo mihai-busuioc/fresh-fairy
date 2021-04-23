@@ -30,10 +30,16 @@
                 <div class="card">
                     <div class="d-flex justify-content-center border-bottom">
                         <div class="p-3">
+                            {% if from_profile %}
+                            <p class="text-black my-auto">Your order information is below. A confirmation email was
+                                sent to
+                                <strong>{{ order.email }}</strong> on the order date!</p>
+                            {% else %}
                             <p class="text-black my-auto">Your order information is below. A confirmation email will
                                 be
                                 sent to
-                                <strong>{{ order.email }}</strong></p>
+                                <strong>{{ order.email }}</strong>!</p>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="row g-0">
