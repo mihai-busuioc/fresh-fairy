@@ -55,7 +55,7 @@
     <header>
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg mt-0 pt-0 logo-font navbar-dark">
-            <div class="container-fluid bg-opaque fixed-top-desktop-only">
+            <div class="container-fluid d-flex bg-opaque fixed-top-desktop-only">
                 <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'media/logo_fresh.png' %}" alt=""
                         width="70" height="70"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -74,13 +74,14 @@
                             <a class="nav-link" href="#">About Us</a>
                         </li>
                         <!--User options-->
-                        <li class="nav-item dropdown">
+                        <li class="nav-item  dropdown">
                             <a class="nav-link " href="#" id="user-options" role="button" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                                aria-expanded="false" aria-haspopup="true">
                                 <p class="my-0">Client Portal</p>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-dark text-end border-0"
+                            <div class="dropdown-menu desktop-dropdown dropdown-menu-dark text-end border-0"
                                 aria-labelledby="user-options">
+
                                 {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser %}
                                 <a href="" class="dropdown-item">Management</a>

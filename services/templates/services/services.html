@@ -22,13 +22,14 @@
     </div>
     <div class="row">
         <div class="service-container">
-            <div class="row mt-1 mb-2"></div>
+            <div class="row " style="height: 80px"></div>
             <div class="row ">
                 {% for services in services %}
-                <div class="col-sm-6 col-md-3 cpl-lg-3">
-                    <div class="card h-100 border-0">
+
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div class="card h-100 border-1 shadow-lg p-3 mb-4 bg-white rounded-3">
                         {% if services.image %}
-                        <a href="{% url 'service_detail' services.id %}">
+                        <a href=" {% url 'service_detail' services.id %}">
                             <img src="{{ services.image.url }}" alt="{{ services.name }}"
                                 class="card-img-top img-fluid">
                         </a>

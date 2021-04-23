@@ -12,7 +12,7 @@ body {
 }
 
 .bg-opaque {
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .75);
 }
 
 .logo-font {
@@ -197,21 +197,19 @@ body {
 
 /* ---- Media Q ----*/
 
-/* Slightly larger container on xl screens */
 @media (min-width: 1200px) {
     .container {
         max-width: 80%;
     }
 }
 
-/* Fixed top navbar on med and up */
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
         position: fixed;
         top: 0;
         right: 0;
         left: 0;
-        z-index: 9999;
+        z-index: 999;
     }
 
     .header-container {
@@ -221,12 +219,14 @@ body {
     .discount-container {
         margin-top: 70px;
     }
-}
 
-@media (max-width: 774px) {
+    .desktop-dropdown {
+        top: 80px;
+    }
+
     .bg-opaque {
         background: rgba(0, 0, 0, .5);
-        position: relative;
+
 
     }
 }
