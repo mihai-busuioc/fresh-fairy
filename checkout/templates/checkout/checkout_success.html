@@ -24,33 +24,31 @@
         </div>
     </div>
     <!-- checkout success-->
-    <div class="container container-main mt-4 mb-4">
+    <div class="container mt-4 mb-4">
         <div class="row d-flex cart align-items-center justify-content-center">
             <div class="col-md-10">
                 <div class="card">
                     <div class="d-flex justify-content-center border-bottom">
                         <div class="p-3">
-                            <div class="progresses">
-                                <p class="text-black my-auto">Your order information is below. A confirmation email will
-                                    be
-                                    sent to
-                                    <strong>{{ order.email }}</strong></p>
-                            </div>
+                            <p class="text-black my-auto">Your order information is below. A confirmation email will
+                                be
+                                sent to
+                                <strong>{{ order.email }}</strong></p>
                         </div>
                     </div>
                     <div class="row g-0">
-                        <div class="col-md-6 border-end p-5">
-                            <div class="text-center order-details">
-                                <div class="d-flex  mb-5 flex-column align-items-center">
+                        <div class="col-md-6 border-end p-1">
+                            <div class="text-center ">
+                                <div class="d-flex  flex-column align-items-center">
                                     <p class="  fw-bold">
                                         Hi <span class="text-black">{{ order.full_name|title }}</span>
                                     </p>
-                                    <span class="fw-bold mt-2"> Order placed on:
+                                    <span class="fw-bold mt-1"> Order placed on:
                                     </span>
                                     <span class="text-black"> {{ order.date }} </span>
-                                    <small class="mt-2"> <i class="fa fa-check"></i> Confirmed </small>
+                                    <small class="mt-1"> <i class="fa fa-check"></i> Confirmed </small>
                                     <!-- adress -->
-                                    <p class="fw-bold  mt-4 "> Delivery Address: </p>
+                                    <p class="fw-bold  mt-1 "> Delivery Address: </p>
                                     <p class="mb-0 text-black">{{ order.street_address1 }}</p>
                                     {% if order.street_address2 %}
                                     <p class="mb-0 text-black">{{ order.street_address1 }}</p>
@@ -67,7 +65,7 @@
                                     <!-- profile page btn-->
                                 </div>
                                 {% if request.user.is_authenticated %}
-                                <a href="{% url 'profile' %}" class="btn btn-sm btn-fresh rounded-pill mt-5">
+                                <a href="{% url 'profile' %}" class="btn btn-sm btn-fresh mt-1 rounded-pill">
                                     <span class="icon">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
