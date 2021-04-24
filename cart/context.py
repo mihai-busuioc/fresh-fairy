@@ -2,6 +2,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from services.models import Services
+from profiles.models import UserProfile
 
 
 def cart_contents(request):
@@ -12,16 +13,6 @@ def cart_contents(request):
     cart = request.session.get('cart', {})
 
     for item_id, item_data in cart.items():
-        """if isinstance(item_data, int):
-            service = get_object_or_404(Services, pk=item_id)
-            total += item_data * service.price
-            services_count += item_data
-            cart_items.append({
-                'item_id': item_id,
-                'quantity': item_data,
-                'service': service,
-            })
-        else:"""
         service = get_object_or_404(Services, pk=item_id)
         for date, quantity in item_data['items_by_date'].items():
             total += quantity * service.price
@@ -32,12 +23,20 @@ def cart_contents(request):
                 'service': service,
                 'date': date,
             })
-    if total < settings.DISCOUNT_THRESHOLD:
-        discount = 0
-        discount_delta = settings.DISCOUNT_THRESHOLD - total
+    if request.user.is_authenticated:
+        if total < settings.DISCOUNT_THRESHOLD:
+            discount = 0
+            discount_delta = settings.DISCOUNT_THRESHOLD - total
+        else:
+            discount = total * Decimal(settings.DISCOUNT_PERCENTAGE_USER / 100)
+            discount_delta = 0
     else:
-        discount = total * Decimal(settings.DISCOUNT_PERCENTAGE / 100)
-        discount_delta = 0
+        if total < settings.DISCOUNT_THRESHOLD:
+            discount = 0
+            discount_delta = settings.DISCOUNT_THRESHOLD - total
+        else:
+            discount = total * Decimal(settings.DISCOUNT_PERCENTAGE / 100)
+            discount_delta = 0
 
     grand_total = total - discount
 
