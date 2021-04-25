@@ -22,10 +22,10 @@ def all_services(request):
 def service_detail(request, services_id):
     """ A view to show the detailed product """
 
-    service = get_object_or_404(Services, pk=services_id)
+    services = get_object_or_404(Services, pk=services_id)
 
     context = {
-        'service': service,
+        'service': services,
     }
 
     return render(request, 'services/service_detail.html', context)
@@ -48,6 +48,31 @@ def add_service(request):
     template = 'services/add_service.html'
     context = {
         'form': form,
+    }
+
+    return render(request, template, context)
+
+
+def edit_service(request, services_id):
+    """ Edit a service in the store """
+    service = get_object_or_404(Services, pk=services_id)
+    if request.method == 'POST':
+        form = ServicesForm(request.POST, request.FILES, instance=service)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated service!')
+            return redirect(reverse('service_detail', args=[service.id]))
+        else:
+            messages.error(
+                request, 'Failed to update service. Please ensure the form is valid.')
+    else:
+        form = ServicesForm(instance=service)
+        messages.info(request, f'You are editing {service.name}')
+
+    template = 'services/edit_service.html'
+    context = {
+        'form': form,
+        'service': service,
     }
 
     return render(request, template, context)
