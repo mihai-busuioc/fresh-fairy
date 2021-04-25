@@ -67,7 +67,7 @@
                                         <span class="text-uppercase">Edit</span>
                                     </a>
                                     <a href="{% url 'delete_service' services.id %}"
-                                        class="btn btn-sm btn-outline-danger text-end rounded-pill mt-5 border-0">
+                                        class="btn btn-sm btn-outline-danger text-end rounded-pill mt-5 border-0 confirm-del ">
                                         <span class="icon">
                                             <i class="fas fa-trash-alt"></i>
                                         </span>
@@ -85,4 +85,12 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block postloadjs %}
+<script type='text/javascript'>
+    $(document).on('click', '.confirm-del', function () {
+        return confirm('Are you sure you want to delete this service?');
+    })
+</script>
 {% endblock %}
