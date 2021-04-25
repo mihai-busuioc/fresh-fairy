@@ -49,7 +49,7 @@
                     <tr>
                         <th scope="row"><a href="{% url 'order_history' order.order_number %}"
                                 title="{{ order.order_number}}">
-                                {{ order.order_number|truncatechars:4 }}
+                                {{ order.order_number|truncatechars:5 }}
                             </a></th>
                         <td>{{ order.date }}</td>
                         <td>
