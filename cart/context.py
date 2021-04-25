@@ -23,20 +23,13 @@ def cart_contents(request):
                 'service': service,
                 'date': date,
             })
-    if request.user.is_authenticated:
-        if total < settings.DISCOUNT_THRESHOLD:
-            discount = 0
-            discount_delta = settings.DISCOUNT_THRESHOLD - total
-        else:
-            discount = total * Decimal(settings.DISCOUNT_PERCENTAGE_USER / 100)
-            discount_delta = 0
+
+    if total < settings.DISCOUNT_THRESHOLD:
+        discount = 0
+        discount_delta = settings.DISCOUNT_THRESHOLD - total
     else:
-        if total < settings.DISCOUNT_THRESHOLD:
-            discount = 0
-            discount_delta = settings.DISCOUNT_THRESHOLD - total
-        else:
-            discount = total * Decimal(settings.DISCOUNT_PERCENTAGE / 100)
-            discount_delta = 0
+        discount = total * Decimal(settings.DISCOUNT_PERCENTAGE / 100)
+        discount_delta = 0
 
     grand_total = total - discount
 
