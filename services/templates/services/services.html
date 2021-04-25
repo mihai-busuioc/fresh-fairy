@@ -52,6 +52,28 @@
                                     {% else %}
                                     <small class="text-muted">No Rating</small>
                                     {% endif %}
+                                    <!--Edit/del buttons-->
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    {% if request.user.is_superuser %}
+                                    <a href="{% url 'edit_service' services.id %}"
+                                        class="btn btn-sm btn-outline-success text-start rounded-pill mt-5 border-0">
+                                        <span class="icon">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span class="text-uppercase">Edit</span>
+                                    </a>
+                                    <a href="{% url 'delete_service' services.id %}"
+                                        class="btn btn-sm btn-outline-danger text-end rounded-pill mt-5 border-0">
+                                        <span class="icon">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </span>
+                                        <span class="text-uppercase">Delete</span>
+                                    </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
