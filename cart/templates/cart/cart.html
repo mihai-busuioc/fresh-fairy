@@ -178,13 +178,27 @@
         <span class="text-uppercase">Keep Shopping</span>
     </a>
     {% endif %}
-
 </div>
+
+<div class="text-center">
+    <a class=" btt-link btn btn-floating shadow-sm rounded-pill">
+        <i class="fas fa-arrow-up text-black"></i>
+    </a>
+</div>
+
+
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
 <script src="{% static 'js/qty_modify.js' %}"></script>
+
+<script type="text/javascript">
+    $('.btt-link').click(function (e) {
+        window.scrollTo(0, 0)
+    })
+</script>
+
 <script>
     // Remove item and reload on click
     $('.remove-item').click(function (e) {

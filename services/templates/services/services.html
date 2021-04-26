@@ -78,6 +78,21 @@
                         </div>
                     </div>
                 </div>
+                {% if forloop.counter|divisibleby:1 %}
+                <div class="col-12 d-sm-none mb-2">
+                    <hr style="color: transparent">
+                </div>
+                {% endif %}
+                {% if forloop.counter|divisibleby:2 %}
+                <div class="col-12 d-none d-sm-block d-md-none d-lg-none mb-2">
+                    <hr style="color: transparent">
+                </div>
+                {% endif %}
+                {% if forloop.counter|divisibleby:4 %}
+                <div class="col-12 d-none d-xl-block mb-2">
+                    <hr style="color: transparent">
+                </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
