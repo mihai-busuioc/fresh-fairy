@@ -11,10 +11,10 @@ from .forms import ServicesForm
 def all_services(request):
     """ A view to show all the services page """
 
-    services = Services.objects.all()
+    service = Services.objects.all()
 
     context = {
-        'services': services,
+        'service': service,
     }
 
     return render(request, 'services/services.html', context)
@@ -23,10 +23,10 @@ def all_services(request):
 def service_detail(request, services_id):
     """ A view to show the detailed product """
 
-    services = get_object_or_404(Services, pk=services_id)
+    service = get_object_or_404(Services, pk=services_id)
 
     context = {
-        'service': services,
+        'service': service,
     }
 
     return render(request, 'services/service_detail.html', context)
@@ -36,7 +36,7 @@ def service_detail(request, services_id):
 def add_service(request):
     """ Add a service to the store """
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only store owners cad do that!')
+        messages.error(request, 'Sorry, only store owners can do that!')
         return redirect(reverse('home'))
 
     if request.method == 'POST':
@@ -63,7 +63,7 @@ def add_service(request):
 def edit_service(request, services_id):
     """ Edit a service in the store """
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only store owners cad do that!')
+        messages.error(request, 'Sorry, only store owners can do that!')
         return redirect(reverse('home'))
 
     service = get_object_or_404(Services, pk=services_id)
@@ -93,7 +93,7 @@ def edit_service(request, services_id):
 def delete_service(request, services_id):
     """Delete service from store"""
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only store owners cad do that!')
+        messages.error(request, 'Sorry, only store owners can do that!')
         return redirect(reverse('home'))
 
     service = get_object_or_404(Services, pk=services_id)
