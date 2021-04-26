@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background: url('/media/home_background.jpg') no-repeat center fixed;
+    background: url('/static/media/home_background.jpg') no-repeat center fixed;
     background-size: cover;
     height: 80vh;
     color: #24ADE3;
