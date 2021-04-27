@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col text-center bg-text-title pt-2 text-title">
+            <h1 class="logo-font mb-4">My Profile</h1>
+            <hr class="w-50 mx-auto my-auto mb-0">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row " style="height: 80px"></div>
+        <div class="card mt-5 profile text-center col-8 offset-2">
+            <div class="pt-5 text-muted">
+                <h3>Default Delivery Information</h3>
+                <p class="text-muted">
+                    Below are shipping details saved for this account, <span
+                        class="text-black">{{ user.username|title }}</span>.
+                    Update the form if needed.
+                </p>
+            </div>
+            <div class="card-body">
+                <form class="" action="{% url 'profile' %}" method="POST" id="profile-update-form">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="btn btn-black mt-2 rounded-pill text-uppercase float-right">Update
+                        Information</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
+{% endblock %}

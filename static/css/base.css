@@ -271,11 +271,12 @@ body {
     }
 
     .discount-container {
-        margin-top: 70px;
+        margin-top: 80px;
+        padding-top: 10px;
     }
 
     .desktop-dropdown {
-        top: 80px;
+        top: 100px;
     }
 
     .bg-opaque {
@@ -286,6 +287,8 @@ body {
 
     .bg-text-title {
         background: transparent;
+        margin-top: 20px;
+        padding-top: 30px;
     }
 
 }
