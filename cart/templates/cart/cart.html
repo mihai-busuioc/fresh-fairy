@@ -155,23 +155,29 @@
     <!--Back and checkout buttons-->
     <div class="row d-flex align-items-center mt-4 mb-3 justify-content-center">
         <div class="col-md-8">
-            <a href="{% url 'services' %}" class="btn btn-sm btn-outline-black rounded-pill">
+            <a href="{% url 'services' %}" class="btn  btn-outline-black rounded-pill" style="font-size: .7rem;">
                 <span class="icon">
                     <i class="fas fa-arrow-left"></i>
                 </span>
                 <span class="text-uppercase">Keep Shopping</span>
             </a>
-            <a href="{% url 'checkout' %}" class="btn btn-black rounded-pill btn-sm" style="float: right">
+            <a href="{% url 'checkout' %}" class="btn btn-black rounded-pill" style="float: right; font-size: .7rem;">
                 <span class="text-uppercase">Secure Checkout</span>
                 <span class="icon">
                     <i class="fas fa-lock"></i>
                 </span>
             </a>
         </div>
+        <div>
+            <!--BTT button-->
+            <a class=" btn btn-floating shadow-sm rounded-pill">
+                <i class="fas fa-arrow-up text-black"></i>
+            </a>
+        </div>
     </div>
     {% else %}
     <p class="lead text-center mb-5">Nothing selected!</p>
-    <a href="{% url 'services' %}" class="btn btn-outline-black rounded-pill btn-sm">
+    <a href="{% url 'services' %}" class="btn btn-outline-black rounded-pill">
         <span class="icon">
             <i class="fas fa-arrow-left"></i>
         </span>
@@ -180,11 +186,7 @@
     {% endif %}
 </div>
 
-<div class="text-center">
-    <a class=" btt-link btn btn-floating shadow-sm rounded-pill">
-        <i class="fas fa-arrow-up text-black"></i>
-    </a>
-</div>
+
 
 
 {% endblock %}
@@ -194,7 +196,7 @@
 <script src="{% static 'js/qty_modify.js' %}"></script>
 
 <script type="text/javascript">
-    $('.btt-link').click(function (e) {
+    $('.btn-floating').click(function (e) {
         window.scrollTo(0, 0)
     })
 </script>

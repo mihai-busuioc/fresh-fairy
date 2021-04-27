@@ -223,6 +223,17 @@ body {
     border-radius: 0;
 }
 
+.btn-floating {
+    height: 42px;
+    width: 42px;
+    position: fixed;
+    bottom: 30px;
+    right: 15px;
+    border-color: #24ADE3;
+    background-color: #24ADE3;
+
+}
+
 /* ---- Media Q ----*/
 
 @media (min-width: 1200px) {
