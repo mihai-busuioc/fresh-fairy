@@ -97,17 +97,17 @@
 
                         <!--NavCart-->
 
-                        <li class="nav-item"></li>
-                        <a id="cart-popover" class="nav-link" data-placement="bottom" title="Cart"
-                            href="{% url 'view_cart' %}">
-                            <i class="fas fa-shopping-cart">
-                                {% if grand_total %}
-                                £{{ grand_total|floatformat:2}}
-                                {% else %}
-                                £0.00
-                                {% endif %}
-                            </i>
-                        </a>
+                        <li class="nav-item">
+                            <a id="cart-popover" class="nav-link" data-placement="bottom" title="Cart"
+                                href="{% url 'view_cart' %}">
+                                <i class="fas fa-shopping-cart">
+                                    {% if grand_total %}
+                                    £{{ grand_total|floatformat:2}}
+                                    {% else %}
+                                    £0.00
+                                    {% endif %}
+                                </i>
+                            </a>
                         </li>
                     </ul>
 
