@@ -28,8 +28,12 @@ def cart_contents(request):
         discount = 0
         discount_delta = settings.DISCOUNT_THRESHOLD - total
     else:
-        discount = total * Decimal(settings.DISCOUNT_PERCENTAGE / 100)
-        discount_delta = 0
+        if request.user.is_authenticated:
+            discount = total * Decimal(settings.DISCOUNT_PERCENTAGE_USER / 100)
+            discount_delta = 0
+        else:
+            discount = total * Decimal(settings.DISCOUNT_PERCENTAGE / 100)
+            discount_delta = 0
 
     grand_total = total - discount
 

@@ -47,8 +47,12 @@ class Order(models.Model):
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))[
             'lineitem_total__sum'] or 0
         if self.order_total > settings.DISCOUNT_THRESHOLD:
-            self.discount = self.order_total * \
-                settings.DISCOUNT_PERCENTAGE / 100
+            if self.user_profile:
+                self.discount = self.order_total * \
+                    settings.DISCOUNT_PERCENTAGE_USER / 100
+            else:
+                self.discount = self.order_total * \
+                    settings.DISCOUNT_PERCENTAGE / 100
         else:
             self.discount = 0
         self.grand_total = self.order_total - self.discount

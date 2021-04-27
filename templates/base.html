@@ -120,22 +120,22 @@
                 {% if cart_items and discount_delta > 0 %}
                 <h4 class="my-1 text-danger">
                     {% if request.user.is_authenticated %}
-                    <h4>You could get a 20% discount by spending just <strong>£{{ discount_delta }}</strong> more!</h4>
+                    <h4>You could get a 30% discount by spending just <strong>£{{ discount_delta }}</strong> more!</h4>
                     {% else %}
                     <h4>You could get a 20% discount by spending just <strong>£{{ discount_delta }}</strong> more!
                     </h4>
                     {% endif %}
                     {% elif discount == 0 %}
                     {% if request.user.is_authenticated %}
-                    <h4>20% Discount on orders over £{{ discount_threshold }}!</h4>
+                    <h4>30% Discount on orders over £{{ discount_threshold }}!</h4>
                     {% else %}
                     <h4 class="logo-font my-1">20% Discount on orders over £{{ discount_threshold }}!</h4>
                     {% endif %}
                     {% else %}
                     {% if request.user.is_authenticated %}
-                    <h4 class=" my-1">Congratulations, you have a 20% discount!</h4>
+                    <h4 class=" my-1">Congratulations, you have a 30% discount!</h4>
                     {% else %}
-                    <h4 class=" my-1">Congratulations, you have a 20% discount, Register/Login !</h4>
+                    <h4 class=" my-1">Congratulations, you have a 20% discount, Register/Login to get 10% extra!</h4>
                     {% endif %}
                     {% endif %}
             </div>
