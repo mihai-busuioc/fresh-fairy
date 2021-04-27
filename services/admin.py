@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Services
+from .models import Services, Review
 
 
 class ServicesAdmin(admin.ModelAdmin):
@@ -7,11 +7,21 @@ class ServicesAdmin(admin.ModelAdmin):
         'sku',
         'name',
         'price',
-        'rating',
         'image',
     )
 
     ordering = ('sku',)
 
 
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = (
+        'service',
+        'date_reviewed',
+        'user',
+        'title',
+        'stars',
+    )
+
+
 admin.site.register(Services, ServicesAdmin)
+admin.site.register(Review, ReviewAdmin)

@@ -249,6 +249,65 @@ body {
 
 }
 
+/* Star ratings */
+/*code from https://github.com/Carly07*/
+
+.rating-box {
+    perspective: 1000px;
+}
+
+.stars {
+    position: absolute;
+    -ms-transform: translate(0%, 0%) rotateY(180deg);
+    -moz-transform: translate(0%, 0%) rotateY(180deg);
+    -o-transform: translate(0%, 0%) rotateY(180deg);
+    -webkit-transform: translate(0%, 0%) rotateY(180deg);
+    transform: translate(0%, 0%) rotateY(180deg);
+}
+
+.stars input {
+    display: none;
+}
+
+.stars label {
+    display: inline-block;
+    cursor: pointer;
+    width: 20px;
+    padding-left: 0px;
+}
+
+.stars label:before {
+    content: '\f005';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: relative;
+    display: block;
+    font-size: 20px;
+    color: #cfcfce;
+}
+
+.stars label:after {
+    content: '\f005';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    display: block;
+    color: #24ADE3;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, .5)
+}
+
+.stars label:hover:after,
+.stars label:hover~label:after,
+.stars input:checked~label:after {
+    opacity: 1;
+}
+
 /* ---- Media Q ----*/
 
 @media (min-width: 1200px) {

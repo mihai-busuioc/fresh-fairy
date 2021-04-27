@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .models import Services
-from .forms import ServicesForm
+from .models import Services, Review
+from .forms import ServicesForm, ReviewForm
 
 # Create your views here.
 
@@ -25,8 +25,25 @@ def service_detail(request, services_id):
 
     service = get_object_or_404(Services, pk=services_id)
 
+    reviews = Review.objects.filter(
+        service_id=service.id).order_by('-date_reviewed')
+
+    if request.method == 'POST':
+        review_form = Review(
+            stars=request.POST.get('stars'),
+            title=request.POST.get('title'),
+            review_text=request.POST.get('review_text'),
+            user=request.user,
+            service=service
+        )
+        review_form.save()
+        messages.success(request, 'Thank you for your review.')
+        return redirect('service_detail', services_id)
+
     context = {
         'service': service,
+        'form': ReviewForm,
+        'reviews': reviews
     }
 
     return render(request, 'services/service_detail.html', context)
