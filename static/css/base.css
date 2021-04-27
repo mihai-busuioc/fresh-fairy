@@ -15,6 +15,10 @@ body {
     background: rgba(0, 0, 0, .75);
 }
 
+.bg-text-title {
+    background: rgba(0, 0, 0, .75);
+}
+
 .logo-font {
     text-transform: uppercase;
 }
@@ -43,6 +47,17 @@ body {
     position: fixed;
     background: white;
     z-index: -1;
+}
+
+.title-container {
+    color: white;
+}
+
+.text-title {
+    color: white;
+    text-shadow: 3px 3px black;
+
+
 }
 
 /* ----- Containers----*/
@@ -267,6 +282,10 @@ body {
         background: rgba(0, 0, 0, .5);
 
 
+    }
+
+    .bg-text-title {
+        background: transparent;
     }
 
 }
