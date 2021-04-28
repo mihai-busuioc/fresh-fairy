@@ -54,7 +54,7 @@
 <body>
     <header>
         <!--Navbar-->
-        <nav class="navbar navbar-expand-lg mt-0 pt-0 logo-font navbar-dark">
+        <nav class="navbar navbar-nav navbar-expand-lg mt-0 pt-0 logo-font navbar-dark">
             <div class="container-fluid d-flex bg-opaque fixed-top-desktop-only">
                 <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'media/logo_fresh.png' %}" alt=""
                         width="70" height="70"></a>
@@ -110,33 +110,53 @@
                 </div>
             </div>
         </nav>
-        <div id="discount-banner" class="row text-center">
-            <div class="col discount-container fixed-top-desktop-only bg-black text-white">
+        <div class="container-fluid">
+            <div id="discount-banner" class="row  text-center">
+                <div class="col discount-container fixed-top-desktop-only bg-black text-white">
 
-                {% if cart_items and discount_delta > 0 %}
-                <h4 class="my-1 text-danger">
-                    {% if request.user.is_authenticated %}
-                    <h4>You could get a 30% discount by spending just <strong>£{{ discount_delta }}</strong> more!</h4>
-                    {% else %}
-                    <h4>You could get a 20% discount by spending just <strong>£{{ discount_delta }}</strong> more!
-                    </h4>
-                    {% endif %}
-                    {% elif discount == 0 %}
-                    {% if request.user.is_authenticated %}
-                    <h4>30% Discount on orders over £{{ discount_threshold }}!</h4>
-                    {% else %}
-                    <h4 class="logo-font my-1">20% Discount on orders over £{{ discount_threshold }}!</h4>
-                    {% endif %}
-                    {% else %}
-                    {% if request.user.is_authenticated %}
-                    <h4 class=" my-1">Congratulations, you have a 30% discount!</h4>
-                    {% else %}
-                    <h4 class=" my-1">Congratulations, you have a 20% discount, Register/Login to get 10% extra!</h4>
-                    {% endif %}
-                    {% endif %}
+                    {% if cart_items and discount_delta > 0 %}
+                    <h4 class="my-1 text-danger">
+                        {% if request.user.is_authenticated %}
+                        <h4>You could get a 30% discount by spending just <strong>£{{ discount_delta }}</strong> more!
+                        </h4>
+                        {% else %}
+                        <h4>You could get a 20% discount by spending just <strong>£{{ discount_delta }}</strong> more!
+                        </h4>
+                        {% endif %}
+                        {% elif discount == 0 %}
+                        {% if request.user.is_authenticated %}
+                        <h4>30% Discount on orders over £{{ discount_threshold }}!</h4>
+                        {% else %}
+                        <h4 class="logo-font my-1">20% Discount on orders over £{{ discount_threshold }}!</h4>
+                        {% endif %}
+                        {% else %}
+                        {% if request.user.is_authenticated %}
+                        <h4 class=" my-1">Congratulations, you have a 30% discount!</h4>
+                        {% else %}
+                        <h4 class=" my-1">Congratulations, you have a 20% discount, Register/Login to get 10% extra!
+                        </h4>
+                        {% endif %}
+                        {% endif %}
+                </div>
             </div>
         </div>
     </header>
+    {% block page_header %}
+    {% endblock %}
+    <main id="page-container">
+        {% block content %}
+        {% endblock %}
+    </main>
+    <!-- Footer -->
+    <footer id="footer" class="bg-light text-center ">
+
+        <!-- Copyright -->
+        <div class="text-center py-3" style="background-color: rgba(0, 0, 0, .75);">
+            © 2021 Copyright:
+            <a class="text-white" href="https://github.com/mihai-busuioc" target="_blank">Mihai Busuioc</a>
+        </div>
+
+    </footer>
 
     {% if messages %}
     <div class="message-container">
@@ -156,12 +176,6 @@
     </div>
     {% endif %}
 
-    {% block page_header %}
-    {% endblock %}
-
-    {% block content %}
-    {% endblock %}
-
     {% block postloadjs %}
     <script>
         $(document).ready(function () {
@@ -171,5 +185,7 @@
     {% endblock %}
 
 </body>
+
+
 
 </html>
