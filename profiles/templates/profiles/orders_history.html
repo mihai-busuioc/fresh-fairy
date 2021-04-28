@@ -28,16 +28,17 @@
         <div class="card mt-5 profile text-center col-8 offset-2">
             <div class="pt-5 text-muted">
                 <h3>Your order history</h3>
+                <hr class="col-6 offset-3 text-black">
                 <p class="text-muted">
                     Below are your orders placed on this account, <span
                         class="text-black">{{ user.username|title }}</span>.
                 </p>
+                
             </div>
             {% if orders %}
             <div class="card-body">
                 <div>
-                    <p class="text-muted text-center">Order History</p>
-                    <hr class="col-6 offset-3 text-black">
+
 
                     {% for order in orders %}
                     <div class=" card mb-3">
