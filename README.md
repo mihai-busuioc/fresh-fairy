@@ -96,7 +96,6 @@ The chevrons arrows and the lock all  are conventional, clean and would be what 
 
 #### Colours
 
-![colours](https://github.com/Carly07/the_gin_shed/raw/master/static/wireframes/colours.png)
 
 * White `#fff`
 * Black `#000`
