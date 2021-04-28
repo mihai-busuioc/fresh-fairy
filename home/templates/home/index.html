@@ -10,7 +10,49 @@
 {% endblock %}
 
 {% block content %}
+<div class="container-fluid">
 
+    <div class="row">
+        <div class="row " style="height: 80px"></div>
+        <div class="card mt-5  bg-home text-start col-8 offset-2 ">
+            <h1 class="pt-5 text-title">
+                5 <br>
+                STAR
+                <br>
+                RATED <br>
+                NATIONWIDE <br>
+                CLEANING SERVICES
+            </h1>
+            <div class="mt-5 mb-5">
+                <a href="{% url 'services' %}" class="btn btn-profile btn-outline-black rounded-pill border-1">Choose a
+                    service </a>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="container my-5 text-muted bg-white">
+
+            <h3 class="text-center mt-5">Our Story</h3>
+            <p class="my-5"></p>
+            FreshFairy Cleaning is part of United Cleaning LTD, we formed this business in 2021 but with many years
+            experience in cleaning industry. The founder of the business Mihai has been in this field of
+            business since year 2000. So having two decades experience can ensure customers with better experience
+            </p>
+
+            <h3 class="text-center mt-5">Our Aim </h3>
+
+            <p class="my-3"></p>
+            To be the best Company for home services in Greater London and surrounding areas, we do this
+            by making sure our customers are satisfied. We pay attention to all details when you book your job with
+            us.
+            </p>
+        </div>
+
+    </div>
+    <!--
 <div class="container h-100">
     <div class="row h-100">
         <div class="col-8 col-md-6 my-auto">
@@ -18,5 +60,5 @@
         </div>
     </div>
 </div>
-
-{% endblock %}
+-->
+    {% endblock %}

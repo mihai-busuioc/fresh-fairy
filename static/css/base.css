@@ -15,6 +15,10 @@ body {
     background: rgba(0, 0, 0, .75);
 }
 
+.bg-home {
+    background: rgba(0, 0, 0, .25);
+}
+
 .bg-text-title {
     background: rgba(0, 0, 0, .75);
 }
