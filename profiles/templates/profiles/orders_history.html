@@ -33,53 +33,61 @@
                         class="text-black">{{ user.username|title }}</span>.
                 </p>
             </div>
+            {% if orders %}
             <div class="card-body">
-                <div class="col-12 col-lg-8 offset-2">
+                <div>
                     <p class="text-muted text-center">Order History</p>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Order No</th>
-                                <th scope="col">Services</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for order in orders %}
-                            <tr>
-                                <th scope="row">{{ order.date }}</th>
-                                <td>
-                                    <a href="{% url 'order_history' order.order_number %}"
-                                        title="{{ order.order_number}}">
-                                        {{ order.order_number|truncatechars:8 }}
-                                    </a>
-                                </td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        {% for item in order.lineitems.all %}
-                                        <li class="small">
-                                            {{ item.service.name }} x {{ item.quantity }} for: {{ item.service_date }}
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                </td>
-                                <td>£{{ order.grand_total }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <!--order end-->
+                    <hr class="col-6 offset-3 text-black">
+
+                    {% for order in orders %}
+                    <div class=" card mb-3">
+                        <div class="card-body">
+                            <p><small class="text-black"><strong>Order number:</strong>
+                                    {{ order.order_number|truncatechars:6 }}</small> <span><a
+                                        href="{% url 'order_history' order.order_number %}"
+                                        title="Details">Details</a></span>
+                            </p>
+                            <small class="text-black"><strong>Order date: </strong><span>{{ order.date }}</span></small>
+                            <p>
+                                <ul class="list-unstyled">
+                                    {% for item in order.lineitems.all %}
+                                    <li class="small">
+                                        {{ item.service.name }} x {{ item.quantity }} for: {{ item.service_date }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+
+                                <span class="text-muted"><strong>Total: £{{ order.grand_total }}</strong></span>
+                            </p>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+
                 </div>
             </div>
+            {% else %}
+            <p class="text-black">There's no order for your account, choose a service </p>
+            <div class=" mb-3">
+                <a href="{% url 'services' %}"
+                    class="btn btn-black btn-sm rounded-pill d-inline-block m-auto">Services</a>
+            </div>
+            {% endif %}
         </div>
     </div>
-    <!-- order history-->
-
+    <!--BTT button-->
+    <a class=" btn btn-floating shadow-sm rounded-pill">
+        <i class="fas fa-arrow-up text-black"></i>
+    </a>
 </div>
 {% endblock %}
-
 {% block postloadjs %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
+<script>
+    $('.btn-floating').click(function (e) {
+        window.scrollTo(0, 0)
+    })
+</script>
 {% endblock %}

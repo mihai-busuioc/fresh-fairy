@@ -153,70 +153,17 @@
         </div>
 
     </div>
-    <!--
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-            <h4 class="mb-4 text-center text-muted">Reviews</h4>
-        </div>
-        <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-5 offset-md-1 col-lg-4 offset-lg-2">
-            <div class="product-details-container mb-3">
-                Review Form 
-                <div class="row">
-                    <div class="col-12">
-                        {% if user.is_authenticated %}
-
-                        <form action="#" method="POST" class="form mt-1 mb-3">
-                            {% csrf_token %}
-                            <div class="rating-box mb-3">
-                                <p class="mb-2 text-muted ">Your rating*</p>
-                                <div class="stars">
-                                    <input type="radio" id="star5" value="5" name="stars"><label for="star5"></label>
-                                    <input type="radio" id="star4" value="4" name="stars"><label for="star4"></label>
-                                    <input type="radio" id="star3" value="3" name="stars"><label for="star3"></label>
-                                    <input type="radio" id="star2" value="2" name="stars"><label for="star2"></label>
-                                    <input type="radio" id="star1" value="1" name="stars" required><label
-                                        for="star1"></label>
-                                </div>
-                            </div>
-
-                            <br>
-                            <div class="col-12 mt-2 p-0">
-                                {{ form|crispy }}
-                            </div>
-                            <div class="col text-right pr-0">
-                                <input type="submit" value="Post Review"
-                                    class="btn btn-sm btn-black rounded-pill text-uppercase mt-2">
-                            </div>
-                        </form>
-                        {% else %}
-                        <p class="text-muted">Please <a href="{% url 'account_signup' %}">Register</a> or <a
-                                href="{% url 'account_login' %}">login</a> to leave a review.</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-5 offset-md-0 col-lg-4">
-            {% if reviews %}
-            {% for review in reviews %}
-
-            <div class="col-12 pl-0">
-                <small class="me-2 text-muted "><i class="fas fa-star"></i>{{ review.stars }} / 5</small>
-                <br>
-                <strong class="mb-1 text-black">{{ review.title }}</strong>
-                <p class="mb-1">{{ review.review_text }}</p>
-                <small class="text-muted">By: {{ review.user|title }}</small>
-                <small class="ms-3 text-muted">On: {{ review.date_reviewed }}</small>
-
-                <hr>
-            </div>
-            {% endfor %}
-            {% else %}
-            <div class="col-12 text-left pl-0">
-                <p>No Reviews.</p>
-            </div>
-            {% endif %}
-        </div>
-    </div>-->
+    <!--BTT button-->
+    <a class=" btn btn-floating shadow-sm rounded-pill">
+        <i class="fas fa-arrow-up text-black"></i>
+    </a>
 </div>
+{% endblock %}
+{% block postloadjs %}
+{{ block.super }}
+<script>
+    $('.btn-floating').click(function (e) {
+        window.scrollTo(0, 0)
+    })
+</script>
 {% endblock %}
