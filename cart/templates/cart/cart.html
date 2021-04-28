@@ -12,32 +12,29 @@
 {% endblock %}
 
 {% block content %}
-<div class="overlay"></div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col text-center mt-3">
-            <h2 class="logo-font">Cart</h2>
-            <hr class="w-50 mx-auto mb-1">
 
+<div class="container-fluid">
+    <!-- title-->
+    <div class="row">
+        <div class="col text-center bg-text-title pt-2 text-title">
+            <h1 class="logo-font mb-4">Cart</h1>
+            <hr class="w-50 mx-auto my-auto mb-0">
         </div>
     </div>
-    {% if cart_items %}
+    <!--card-->
     <div class="container mt-4 mb-4">
         <div class="row d-flex cart align-items-center justify-content-center">
             <div class="col-md-10">
                 <div class="card">
+                    {% if cart_items %}
                     <div class="d-flex justify-content-center border-bottom">
                         <div class="p-3">
-                            <div class="progresses">
 
-
-                                <p class="text-black my-auto">Your cart information is below. </p>
-
-                            </div>
+                            <p class="text-black my-auto">Your cart information is below. </p>
+                            <hr class=" text-black">
                         </div>
                     </div>
                     <div class="row g-0">
-
                         <div class="col bg-light">
                             <div class=" border-bottom">
                                 <!--cart items-->
@@ -53,7 +50,7 @@
                                             £{{ item.service.price }}
                                             each = £{{ item.service.price | calc_subtotal:item.quantity }}</p>
                                         <!-- inc/decrement quantity-->
-                                        <form class="form update-form" method="POST"
+                                        <form class="form px-5 py-3 update-form" method="POST"
                                             action="{% url 'adjust_cart' item.item_id %}">
                                             {% csrf_token %}
                                             <div class="form-group">
@@ -88,10 +85,10 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <!--update/remove links-->
-                                        <a href="#" class="update-link mt-3 text-success"
+                                        <!--update/remove -->
+                                        <a href="#" class="update-link mb-3 ps-5 text-success"
                                             style="float: left"><small>Update</small></a>
-                                        <a href="#" class="remove-item mt-3 text-danger " style="float: right"
+                                        <a href="#" class="remove-item mb-3 pe-5 text-danger " style="float: right"
                                             id="remove_{{ item.item_id }}"
                                             data-your_date="{{ item.date }}"><small>Remove</small></a>
                                     </div>
@@ -107,7 +104,6 @@
                                     </div>
                                 </div>
                                 {% endfor %}
-
 
                             </div>
                             <!--subtotal-->
@@ -134,14 +130,47 @@
                                 </div>
                             </div>
                             <!--Grand total-->
-                            <div class="row g-0">
+                            <div class="row g-0 border-bottom">
                                 <div class="col-md-6">
                                     <div class="p-3 d-flex justify-content-center align-items-center"> <span
-                                            class="fw-bold">Total</span> </div>
+                                            class="fw-bold">Total</span>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="p-3 d-flex justify-content-center align-items-center"> <span
-                                            class="fw-bold">£{{ grand_total|floatformat:2 }}</span> </div>
+                                            class="fw-bold">£{{ grand_total|floatformat:2 }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Back and checkout buttons-->
+                            <div class="row g-0 ">
+                                <div class="col-6">
+                                    <div class=" p-3 d-flex align-items-center text-start ">
+                                        <a href="{% url 'services' %}" class="btn  btn-outline-black rounded-pill"
+                                            style="font-size: .7rem;">
+                                            <span class="icon">
+                                                <i class="fas fa-arrow-left"></i>
+                                            </span>
+                                            <span class="text-uppercase">Keep Shopping</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class=" p-3 align-items-center">
+                                        <a href="{% url 'checkout' %}" class="btn btn-black rounded-pill"
+                                            style=" float: right; font-size: .7rem;">
+                                            <span class="text-uppercase">Secure Checkout</span>
+                                            <span class="icon">
+                                                <i class="fas fa-lock"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div>
+                                    </div>
+                                    <!--BTT button-->
+                                    <a class=" btn btn-floating shadow-sm rounded-pill">
+                                        <i class="fas fa-arrow-up text-black"></i>
+                                    </a>
                                 </div>
                             </div>
 
@@ -152,37 +181,17 @@
             </div>
         </div>
     </div>
-    <!--Back and checkout buttons-->
-    <div class="row d-flex align-items-center mt-4 mb-3 justify-content-center">
-        <div class="col-md-8">
-            <a href="{% url 'services' %}" class="btn  btn-outline-black rounded-pill" style="font-size: .7rem;">
-                <span class="icon">
-                    <i class="fas fa-arrow-left"></i>
-                </span>
-                <span class="text-uppercase">Keep Shopping</span>
-            </a>
-            <a href="{% url 'checkout' %}" class="btn btn-black rounded-pill" style="float: right; font-size: .7rem;">
-                <span class="text-uppercase">Secure Checkout</span>
-                <span class="icon">
-                    <i class="fas fa-lock"></i>
-                </span>
-            </a>
-        </div>
-        <div>
-            <!--BTT button-->
-            <a class=" btn btn-floating shadow-sm rounded-pill">
-                <i class="fas fa-arrow-up text-black"></i>
-            </a>
-        </div>
-    </div>
+
     {% else %}
-    <p class="lead text-center mb-5">Nothing selected!</p>
-    <a href="{% url 'services' %}" class="btn btn-outline-black rounded-pill">
-        <span class="icon">
-            <i class="fas fa-arrow-left"></i>
-        </span>
-        <span class="text-uppercase">Keep Shopping</span>
-    </a>
+    <p class="lead text-center text-muted mb-5 mt-5">Your cart is empty, </p>
+    <div class="text-center mb-3 ">
+        <a href="{% url 'services' %}" class="btn btn-fresh btn-sm rounded-pill">
+            <span class="icon">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+            <span class="text-uppercase">Keep Shopping</span>
+        </a>
+    </div>
     {% endif %}
 </div>
 
